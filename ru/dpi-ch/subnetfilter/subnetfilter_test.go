@@ -26,7 +26,7 @@ func TestMain(m *testing.M) {
 }
 
 func Test1(t *testing.T) {
-	subnets, _ := compileAndRunFilter(`country(\"ru\")`)
+	subnets, _ := compileAndRunFilter(`country("ru")`)
 	got := subnets.Prefixes()
 	want := []netip.Prefix{
 		netip.MustParsePrefix("31.44.8.0/21"),
@@ -38,7 +38,7 @@ func Test1(t *testing.T) {
 
 }
 func Test2(t *testing.T) {
-	subnets, _ := compileAndRunFilter(`country(\"us\", \"au\")`)
+	subnets, _ := compileAndRunFilter(`country("us", "au")`)
 	got := subnets.Prefixes()
 	want := []netip.Prefix{
 		netip.MustParsePrefix("1.0.0.0/24"),
@@ -51,7 +51,7 @@ func Test2(t *testing.T) {
 }
 
 func Test3(t *testing.T) {
-	subnets, _ := compileAndRunFilter(`org(\"google\")`)
+	subnets, _ := compileAndRunFilter(`org("google")`)
 	got := subnets.Prefixes()
 	want := []netip.Prefix{
 		netip.MustParsePrefix("1.179.112.0/20"),
@@ -64,7 +64,7 @@ func Test3(t *testing.T) {
 	}
 }
 func Test4(t *testing.T) {
-	subnets, _ := compileAndRunFilter(`org(\"yandex\")`)
+	subnets, _ := compileAndRunFilter(`org("yandex")`)
 	got := subnets.Prefixes()
 	want := []netip.Prefix{
 		netip.MustParsePrefix("5.45.192.0/18"),
@@ -77,7 +77,7 @@ func Test4(t *testing.T) {
 }
 func Test5(t *testing.T) {
 
-	subnets, _ := compileAndRunFilter(`org(\"yandex\") && country(\"ru\")`)
+	subnets, _ := compileAndRunFilter(`org("yandex") && country("ru")`)
 	got := subnets.Prefixes()
 	want := []netip.Prefix{
 		netip.MustParsePrefix("31.44.8.0/21"),
@@ -90,7 +90,7 @@ func Test5(t *testing.T) {
 
 func Test6(t *testing.T) {
 	cidr := "192.168.0.1/32"
-	subnets, err := compileAndRunFilter(`subnet(\"` + cidr + `\")`)
+	subnets, err := compileAndRunFilter(`subnet("` + cidr + `")`)
 	if err != nil {
 		t.Fatal(err)
 	}

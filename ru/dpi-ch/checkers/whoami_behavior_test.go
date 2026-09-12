@@ -110,7 +110,7 @@ func TestWhoamiFallsBackToRipe(t *testing.T) {
 			_, _ = w.Write([]byte("not json"))
 		case "/whats-my-ip/data.json":
 			ripeCalls++
-			_, _ = w.Write([]byte(`{\"data\":{\"ip\":\"` + expectedIP + `\"}}`))
+			_, _ = w.Write([]byte(`{"data":{"ip":"` + expectedIP + `"}}`))
 		default:
 			http.NotFound(w, r)
 		}
