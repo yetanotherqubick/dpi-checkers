@@ -22,7 +22,7 @@ func TestMain(m *testing.M) {
 	cfg := &config.Get().InetlookupGeolitecsv
 	cfg.CidrAs = filepath.Join(base, "cidr2as_ipv4.csv")
 	cfg.CidrCountry = filepath.Join(base, "cidr2countryIso_ipv4.csv")
-	cfg.GeonameidCountry = filepath.Join(base, "geonameId2сountry_en.csv")
+	cfg.GeonameidCountry = filepath.Join(base, "geonameId2country_en.csv")
 	os.Exit(m.Run())
 }
 
@@ -50,7 +50,7 @@ func configureWhoamiTestLookup(t *testing.T) {
 	cfg := &config.Get().InetlookupGeolitecsv
 	cfg.CidrAs = filepath.Join(base, "cidr2as_ipv4.csv")
 	cfg.CidrCountry = filepath.Join(base, "cidr2countryIso_ipv4.csv")
-	cfg.GeonameidCountry = filepath.Join(base, "geonameId2сountry_en.csv")
+	cfg.GeonameidCountry = filepath.Join(base, "geonameId2country_en.csv")
 }
 
 func TestWhoamiUsesYandex(t *testing.T) {
@@ -110,7 +110,7 @@ func TestWhoamiFallsBackToRipe(t *testing.T) {
 			_, _ = w.Write([]byte("not json"))
 		case "/whats-my-ip/data.json":
 			ripeCalls++
-			_, _ = w.Write([]byte(`{"data":{"ip":"` + expectedIP + `"}}`))
+			_, _ = w.Write([]byte(`{\"data\":{\"ip\":\"` + expectedIP + `\"}}`))
 		default:
 			http.NotFound(w, r)
 		}
