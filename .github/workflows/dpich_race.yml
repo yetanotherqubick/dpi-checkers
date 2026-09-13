@@ -1,0 +1,30 @@
+name: dpi-ch race tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  race:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: ru/dpi-ch/go.mod
+          cache-dependency-path: ru/dpi-ch/go.sum
+
+      - name: Test with race detector
+        working-directory: ru/dpi-ch
+        run: go test -race ./...
